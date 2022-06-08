@@ -1,0 +1,22 @@
+{
+  "name": "editorjsx",
+  "version": "0.0.1",
+  "description": "JSX Dialect for Editor.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shuta13/editorjsx.git"
+  },
+  "author": "shuta13",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shuta13/editorjsx/issues"
+  },
+  "homepage": "https://github.com/shuta13/editorjsx#readme",
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
