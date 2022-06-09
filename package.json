@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "jsx",
+  "name": "@react-block-editor/jsx",
   "version": "0.0.1",
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
