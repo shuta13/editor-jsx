@@ -1,8 +1,8 @@
-# editorjsx
+# jsx
 
 ## [INFO] Under construction
 
-## About editorjsx
+## About jsx
 
 ## Getting started
 
