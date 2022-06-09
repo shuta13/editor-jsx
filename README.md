@@ -2,7 +2,7 @@
 
 ## [INFO] Under construction
 
-## About jsx
+## About jsx(@react-block-editor/jsx)
 
 ## Getting started
 
