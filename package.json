@@ -5,7 +5,8 @@
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "node \"./scripts/rmdir.js\" \"./dist\""
   },
   "repository": {
     "type": "git",
