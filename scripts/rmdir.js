@@ -13,7 +13,7 @@ const sysPath = require("path");
   const basePath = process.cwd();
   const dirPath = sysPath.resolve(basePath, dirName);
   if (!fs.existsSync(dirPath)) {
-    throw new Error(`${dirName} is not exist`);
+    console.warn(`${dirName} is not exist`);
   }
   await fsPromises.rm(dirPath, { recursive: true }).catch((err) => {
     throw new Error(err);

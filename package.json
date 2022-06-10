@@ -5,19 +5,12 @@
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "clean": "node \"./scripts/rmdir.js\" \"./dist\""
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/shuta13/react-editor-jsx.git"
-  },
-  "author": "shuta13",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shuta13/react-editor-jsx/issues"
-  },
-  "homepage": "https://github.com/shuta13/react-editor-jsx#readme",
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "typescript": "^4.7.3"
   }

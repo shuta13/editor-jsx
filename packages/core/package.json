@@ -1,0 +1,23 @@
+{
+  "name": "react-editor-jsx",
+  "version": "0.0.1",
+  "description": "JSX Dialect for Editor.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "clean": "node \"../../scripts/rmdir.js\" \"./dist\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuta13/react-editor-jsx.git"
+  },
+  "author": "shuta13 <hollystarsun@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shuta13/react-editor-jsx/issues"
+  },
+  "homepage": "https://github.com/shuta13/react-editor-jsx#readme"
+}

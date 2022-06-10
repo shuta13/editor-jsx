@@ -1,0 +1,23 @@
+{
+  "name": "react-editor-jsx-feature",
+  "version": "0.0.1",
+  "description": "Feature for react-editor-jsx",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node \"../../scripts/rmdir.js\" \"./dist\"",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuta13/react-editor-jsx.git"
+  },
+  "author": "shuta13 <hollystarsun@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shuta13/react-editor-jsx/issues"
+  },
+  "homepage": "https://github.com/shuta13/react-editor-jsx#readme",
+  "dependencies": {
+    "react-editor-jsx": "npm:core@*"
+  }
+}
