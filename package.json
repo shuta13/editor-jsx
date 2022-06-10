@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@react-block-editor/jsx",
+  "name": "react-editor-jsx",
   "version": "0.0.1",
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/shuta13/jsx.git"
+    "url": "git+ssh://git@github.com/shuta13/react-editor-jsx.git"
   },
   "author": "shuta13",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuta13/jsx/issues"
+    "url": "https://github.com/shuta13/react-editor-jsx/issues"
   },
-  "homepage": "https://github.com/shuta13/jsx#readme",
+  "homepage": "https://github.com/shuta13/react-editor-jsx#readme",
   "devDependencies": {
     "typescript": "^4.7.3"
   }
