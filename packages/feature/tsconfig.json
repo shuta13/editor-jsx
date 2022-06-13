@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
-    "jsx": "react-jsx",
-    "jsxImportSource": "react-editor-jsx"
+    "jsx": "react"
   }
 }
