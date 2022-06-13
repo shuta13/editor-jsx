@@ -23,8 +23,8 @@ const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
 
 export const createElement = (
   type: VNode["type"],
-  config: { [key: string]: any },
-  children?: { [key: string]: any }
+  config: { [key: string]: any } | null,
+  children?: VNode[]
 ) => {
   const props: { [key: string]: any } = {};
 
