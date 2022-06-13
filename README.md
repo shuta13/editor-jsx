@@ -1,8 +1,10 @@
-# jsx
+# editor-jsx
 
 ## [INFO] Under construction
 
-## About jsx(@react-block-editor/jsx)
+## About editor-jsx
+
+### motivation
 
 ## Getting started
 

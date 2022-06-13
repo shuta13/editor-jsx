@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "react-editor-jsx",
+  "name": "editor-jsx",
   "version": "0.0.1",
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
@@ -8,9 +8,7 @@
     "build": "npm run build --workspaces --if-present",
     "clean": "npm run clean --workspaces --if-present"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "devDependencies": {
     "@editorjs/editorjs": "^2.24.3",
     "typescript": "^4.7.3"
