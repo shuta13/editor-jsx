@@ -28,11 +28,11 @@ export const createElement = (
 ) => {
   const props: { [key: string]: any } = {};
 
-  console.log("////////");
-  console.log({ type });
-  console.log({ props });
-  console.log({ children });
-  console.log("////////");
+  //  console.log("////////");
+  //  console.log({ type });
+  //  console.log({ props });
+  //  console.log({ children });
+  //  console.log("////////");
 
   if (typeof type === "function") {
     type(props);

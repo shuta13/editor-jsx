@@ -1,5 +1,3 @@
-/// <reference lib="dom" />
-
 import { PasteEvent } from "@editorjs/editorjs";
 
 export type ComponentClass<P = {}, _S = {}> = {
@@ -74,9 +72,29 @@ export namespace EditorJSX {
     _isReadOnlySupported?: boolean;
   }
 
-  export interface InlineToolAttributes {}
+  export interface InlineToolAttributes {
+    surround: (range: { [key: string]: any }) => void;
+    checkState: (selection: { [key: string]: any }) => void;
+    renderActions?: () => JSX.IntrinsicElements;
+    clear?: () => void;
 
-  export interface BlockTuneAttributes {}
+    // getter
+    _shortcut?: string;
+    // static
+    _isInline: true;
+    _sanitize?: { [key: string]: any };
+    _title?: string;
+  }
+
+  export interface BlockTuneAttributes<C = any> {
+    save?: () => { [key: string]: any };
+    wrap?: (blockContent: C) => JSX.IntrinsicElements;
+
+    // static
+    _isTune: true;
+    _prepare?: (config: { [key: string]: any }) => void | Promise<void>;
+    _reset?: () => void | Promise<void>;
+  }
 }
 
 declare global {

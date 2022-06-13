@@ -11,7 +11,11 @@ export const createTool = (
 ): ToolConstructable => {
   // TODO: create Editor.js plugin class as vnode
   const init = createElement(Fragment, null, [vNode]);
-  console.log("render: ", { init });
+  console.log(
+    "render: ",
+    { init }
+    // init.props.children[0].type(init.props.children[0].props)
+  );
 
   // TODO: diff & commit
 

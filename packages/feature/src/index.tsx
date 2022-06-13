@@ -26,17 +26,44 @@ const CustomTool: EditorJSX.Tool = () => {
       _isReadOnlySupported={undefined}
       _toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
     >
-      <button onClick={handleClick} />
+      <button onClick={handleClick} /> {/* inserted block */}
     </tool>
   );
 };
 
 const CustomInlineTool: EditorJSX.InlineTool = () => {
-  return <inlineTool></inlineTool>;
+  return (
+    <inlineTool
+      surround={() => {}}
+      checkState={() => {}}
+      renderActions={undefined}
+      clear={undefined}
+      _isInline={true}
+      _shortcut={undefined}
+      _sanitize={undefined}
+      _title={undefined}
+    >
+      <div>
+        <span>InlineTool</span>
+      </div>
+    </inlineTool>
+  );
 };
 
 const CustomBlockTune: EditorJSX.BlockTune = () => {
-  return <blockTune></blockTune>;
+  return (
+    <blockTune
+      save={undefined}
+      wrap={undefined}
+      _isTune={true}
+      _prepare={undefined}
+      _reset={undefined}
+    >
+      <div>
+        <span>InlineTool</span>
+      </div>
+    </blockTune>
+  );
 };
 
 const customTool = createTool(<CustomTool />, null);
