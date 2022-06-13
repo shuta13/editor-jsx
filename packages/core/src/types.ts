@@ -52,13 +52,26 @@ export namespace EditorJSX {
 
   export interface BlockTune extends FunctionComponent {}
 
-  export interface ToolAttributes {
-    save: <T = {}>(blockContent: T) => void;
+  export interface ToolAttributes<C = any> {
+    save: (blockContent: C) => void;
     validate?: boolean;
-    renderSettings: { name: string; icon: JSX.IntrinsicElements }[];
-    destory: () => void;
-    onPaste: (event: PasteEvent) => void;
-    merge: <T = {}>(blockContent: T) => void;
+    renderSettings?: { name: string; icon: JSX.IntrinsicElements }[];
+    destory?: () => void;
+    onPaste?: (event: PasteEvent) => void;
+    merge?: (blockContent: C) => void;
+
+    // static
+    _pasteConfig?: {
+      tags: string[];
+      files: { mimeTypes: string[]; extensions: string[] };
+      patterns: { [key: string]: RegExp };
+    };
+    _sanitize?: { [key: string]: any };
+    _toolbox?: { title: string; icon: JSX.IntrinsicElements };
+    _shortcut?: string;
+    _conversionConfig?: { export: string; import: string };
+    _enableLineBreaks?: boolean;
+    _isReadOnlySupported?: boolean;
   }
 
   export interface InlineToolAttributes {}

@@ -7,25 +7,26 @@ const CustomTool: EditorJSX.Tool = () => {
   const handleClick = () => {
     console.log("clicked");
   };
+  const handleSave: EditorJSX.ToolAttributes<{ value: string }>["save"] = (
+    blockContent
+  ) => console.log(blockContent.value);
   return (
-    <tool>
-      <render
-        pasteConfig={undefined}
-        sanitize={undefined}
-        shortcut={undefined}
-        conversionConfig={undefined}
-        enableLineBreaks={undefined}
-        isReadOnlySupported={undefined}
-        toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
-        save={(blockContent: any) => console.log(blockContent.value)}
-        validate={undefined}
-        settings={undefined}
-        destory={undefined}
-        onPaste={undefined}
-        merge={undefined}
-      >
-        <button onClick={handleClick} />
-      </render>
+    <tool
+      save={handleSave}
+      validate={undefined}
+      renderSettings={undefined}
+      destory={undefined}
+      onPaste={undefined}
+      merge={undefined}
+      _pasteConfig={undefined}
+      _sanitize={undefined}
+      _shortcut={undefined}
+      _conversionConfig={undefined}
+      _enableLineBreaks={undefined}
+      _isReadOnlySupported={undefined}
+      _toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
+    >
+      <button onClick={handleClick} />
     </tool>
   );
 };
@@ -42,13 +43,13 @@ const customTool = createTool(<CustomTool />, null);
 const customInlineTool = createTool(<CustomInlineTool />, null);
 const customBlockTune = createTool(<CustomBlockTune />, null);
 
-new EditorJS({
-  tools: {
-    customTool,
-    CustomInlineTool: { class: customInlineTool },
-    CustomBlockTune: { class: customBlockTune },
-  },
-});
+// new EditorJS({
+//   tools: {
+//     customTool,
+//     CustomInlineTool: { class: customInlineTool },
+//     CustomBlockTune: { class: customBlockTune },
+//   },
+// });
 
 // ```
 // new Editor({

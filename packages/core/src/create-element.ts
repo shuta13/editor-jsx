@@ -34,9 +34,9 @@ export const createElement = (
   console.log({ children });
   console.log("////////");
 
-  // if (typeof type === "function") {
-  //   console.log(type(props));
-  // }
+  if (typeof type === "function") {
+    type(props);
+  }
 
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;
