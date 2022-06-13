@@ -44,11 +44,11 @@ export type VNode<P = {}> = VNodeProps<P> & {
 export type Original = VNode | string | number | null;
 
 export namespace EditorJSX {
-  export interface Tool extends FunctionComponent {}
+  export interface Tool<P = {}> extends FunctionComponent<P> {}
 
-  export interface InlineTool extends FunctionComponent {}
+  export interface InlineTool<P = {}> extends FunctionComponent<P> {}
 
-  export interface BlockTune extends FunctionComponent {}
+  export interface BlockTune<P = {}> extends FunctionComponent<P> {}
 
   export interface ToolAttributes<C = any> {
     save: (blockContent: C) => void;
@@ -98,7 +98,7 @@ export namespace EditorJSX {
 }
 
 declare global {
-  // sourced: https://github.com/preactjs/preact/blob/43d79c0e8f727e9ac745a50c3a61868adb2dcfe7/src/jsx.d.ts
+  // sourced for IntrinsicElements: https://github.com/preactjs/preact/blob/43d79c0e8f727e9ac745a50c3a61868adb2dcfe7/src/jsx.d.ts
   namespace JSX {
     type TargetedEvent<
       Target extends EventTarget = EventTarget,

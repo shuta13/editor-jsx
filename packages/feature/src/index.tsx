@@ -60,7 +60,7 @@ const CustomBlockTune: EditorJSX.BlockTune = () => {
       _reset={undefined}
     >
       <div>
-        <span>InlineTool</span>
+        <span>BlockTune</span>
       </div>
     </blockTune>
   );
