@@ -94,6 +94,11 @@ new EditorJS({
 
 ## Roadmap
 
+- [x] Add skelton
+- [x] Add types for custom JSX elements
+- [ ] Add implements of diff or reconcile
+- [ ] Add functions for transforming vnode to instance of Editor.js
+
 ## Contributing
 
 ## License
