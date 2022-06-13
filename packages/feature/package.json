@@ -1,7 +1,8 @@
 {
-  "name": "react-editor-jsx-feature",
+  "private": true,
+  "name": "editor-jsx-feature",
   "version": "0.0.1",
-  "description": "Feature for react-editor-jsx",
+  "description": "Feature for editor-jsx",
   "main": "index.js",
   "scripts": {
     "clean": "node \"../../scripts/rmdir.js\" \"./dist\"",
@@ -9,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuta13/react-editor-jsx.git"
+    "url": "git+https://github.com/shuta13/editor-jsx.git"
   },
   "author": "shuta13 <hollystarsun@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuta13/react-editor-jsx/issues"
+    "url": "https://github.com/shuta13/editor-jsx/issues"
   },
-  "homepage": "https://github.com/shuta13/react-editor-jsx#readme",
+  "homepage": "https://github.com/shuta13/editor-jsx#readme",
   "dependencies": {
     "react-editor-jsx": "npm:core@*"
   }

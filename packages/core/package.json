@@ -1,5 +1,6 @@
 {
-  "name": "react-editor-jsx",
+  "private": false,
+  "name": "editor-jsx",
   "version": "0.0.1",
   "description": "JSX Dialect for Editor.js",
   "main": "dist/index.js",
@@ -11,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuta13/react-editor-jsx.git"
+    "url": "git+https://github.com/shuta13/editor-jsx.git"
   },
   "author": "shuta13 <hollystarsun@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuta13/react-editor-jsx/issues"
+    "url": "https://github.com/shuta13/editor-jsx/issues"
   },
-  "homepage": "https://github.com/shuta13/react-editor-jsx#readme",
+  "homepage": "https://github.com/shuta13/editor-jsx#readme",
   "peerDependencies": {
     "@editorjs/editorjs": ">=2.24.3"
   }
