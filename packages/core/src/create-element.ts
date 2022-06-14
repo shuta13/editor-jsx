@@ -24,7 +24,7 @@ const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
 export const createElement = (
   type: VNode["type"],
   config: { [key: string]: any } | null,
-  children?: VNode[]
+  ...children: VNode[] // NOTE: evil...
 ) => {
   const props: { [key: string]: any } = {};
 
@@ -34,9 +34,9 @@ export const createElement = (
   //  console.log({ children });
   //  console.log("////////");
 
-  if (typeof type === "function") {
-    type(props);
-  }
+  // if (typeof type === "function") {
+  //   type(props);
+  // }
 
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;

@@ -27,6 +27,10 @@ const CustomTool: EditorJSX.Tool = () => {
       _toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
     >
       <button onClick={handleClick} /> {/* inserted block */}
+      <button onClick={handleClick} /> {/* inserted block */}
+      <button onClick={handleClick} /> {/* inserted block */}
+      <button onClick={handleClick} /> {/* inserted block */}
+      <button onClick={handleClick} /> {/* inserted block */}
     </tool>
   );
 };

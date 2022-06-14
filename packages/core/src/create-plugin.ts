@@ -1,6 +1,7 @@
 import { ToolConstructable, ToolSettings } from "@editorjs/editorjs";
 import { createElement, Fragment } from "./create-element";
 import { VNode } from "./types";
+import { update } from "./parser";
 
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
@@ -10,14 +11,10 @@ export const createTool = (
   parentDom: unknown
 ): ToolConstructable => {
   // TODO: create Editor.js plugin class as vnode
-  const init = createElement(Fragment, null, [vNode]);
-  console.log(
-    "render: ",
-    { init }
-    // init.props.children[0].type(init.props.children[0].props)
-  );
+  const initialVNode = createElement(Fragment, null, vNode);
 
   // TODO: diff & commit
+  update(initialVNode);
 
   // TODO: fix output
   return class {
