@@ -28,15 +28,14 @@ export const createElement = (
 ) => {
   const props: { [key: string]: any } = {};
 
-  //  console.log("////////");
-  //  console.log({ type });
-  //  console.log({ props });
-  //  console.log({ children });
-  //  console.log("////////");
-
   // if (typeof type === "function") {
   //   type(props);
   // }
+  // console.log("////////");
+  // console.log({ type });
+  // console.log({ props });
+  // console.log({ children });
+  // console.log("////////");
 
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;

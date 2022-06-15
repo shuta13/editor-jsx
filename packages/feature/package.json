@@ -6,7 +6,11 @@
   "main": "index.js",
   "scripts": {
     "clean": "node \"../../scripts/rmdir.js\" \"./dist\"",
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "serve": "budo dist/index.js --live",
+    "start": "run-s build serve",
+    "start:watch": "run-p watch serve"
   },
   "repository": {
     "type": "git",

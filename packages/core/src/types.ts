@@ -58,18 +58,18 @@ export namespace EditorJSX {
     onPaste?: (event: PasteEvent) => void;
     merge?: (blockContent: C) => void;
 
-    // static
-    _pasteConfig?: {
+    // static getter
+    static_get_pasteConfig?: {
       tags: string[];
       files: { mimeTypes: string[]; extensions: string[] };
       patterns: { [key: string]: RegExp };
     };
-    _sanitize?: { [key: string]: any };
-    _toolbox?: { title: string; icon: JSX.IntrinsicElements };
-    _shortcut?: string;
-    _conversionConfig?: { export: string; import: string };
-    _enableLineBreaks?: boolean;
-    _isReadOnlySupported?: boolean;
+    static_get_sanitize?: { [key: string]: any };
+    static_get_toolbox?: { title: string; icon: JSX.IntrinsicElements };
+    static_get_shortcut?: string;
+    static_get_conversionConfig?: { export: string; import: string };
+    static_get_enableLineBreaks?: boolean;
+    static_get_isReadOnlySupported?: boolean;
   }
 
   export interface InlineToolAttributes {
@@ -79,21 +79,30 @@ export namespace EditorJSX {
     clear?: () => void;
 
     // getter
-    _shortcut?: string;
-    // static
-    _isInline: true;
-    _sanitize?: { [key: string]: any };
-    _title?: string;
+    get_shortcut?: string;
+    // static getter
+    static_get_isInline: true;
+    static_get_sanitize?: { [key: string]: any };
+    static_get_title?: string;
   }
 
   export interface BlockTuneAttributes<C = any> {
     save?: () => { [key: string]: any };
     wrap?: (blockContent: C) => JSX.IntrinsicElements;
 
+    // static getter
+    static_get_isTune: true;
     // static
-    _isTune: true;
-    _prepare?: (config: { [key: string]: any }) => void | Promise<void>;
-    _reset?: () => void | Promise<void>;
+    static_prepare?: (config: { [key: string]: any }) => void | Promise<void>;
+    static_reset?: () => void | Promise<void>;
+  }
+
+  export interface EditorJSToolAttributes {}
+
+  export interface EditorJSToolElements {
+    tool: EditorJSX.ToolAttributes;
+    inlineTool: EditorJSX.InlineToolAttributes;
+    blockTune: EditorJSX.BlockTuneAttributes;
   }
 }
 
@@ -891,14 +900,7 @@ declare global {
       zoomAndPan?: string;
     }
 
-    interface EditorJSToolAttributes {}
-
-    interface IntrinsicElements {
-      // for Editor.js
-      tool: EditorJSX.ToolAttributes;
-      inlineTool: EditorJSX.InlineToolAttributes;
-      blockTune: EditorJSX.BlockTuneAttributes;
-
+    interface IntrinsicElements extends EditorJSX.EditorJSToolElements {
       // HTML
       a: HTMLAttributes<HTMLAnchorElement>;
       abbr: HTMLAttributes<HTMLElement>;
