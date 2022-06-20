@@ -1,4 +1,4 @@
-import { PasteEvent } from "@editorjs/editorjs";
+import { PasteEvent, ToolConstructable } from "@editorjs/editorjs";
 
 export type ComponentClass<P = {}, _S = {}> = {
   new (props: P, context?: unknown): unknown;
@@ -14,9 +14,9 @@ export type ComponentType<P = {}> = FunctionComponent<P>;
 
 export type Props = {
   children?: any;
-} & {
-  [key: string]: any;
-};
+} & EditorJSX.ToolAttributes &
+  EditorJSX.InlineToolAttributes &
+  EditorJSX.BlockTuneAttributes & { [key: string]: any };
 export type Key = string | number;
 
 type RefObject<T> = { current: T | null };
@@ -34,11 +34,17 @@ export type VNode<P = {}> = VNodeProps<P> & {
   children: Array<VNode> | null;
   parent: VNode | null;
   depth: number | null;
-  dom: { [key: string]: any } | null;
+  dom: HTMLElement | { [key: string]: any } | null;
   nextDom: { [key: string]: any } | null;
   component: { [key: string]: any } | null;
   hydrating: boolean | null;
   constructor: typeof Object.prototype.constructor;
+  pluginProps:
+    | EditorJSX.ToolAttributes
+    | EditorJSX.InlineToolAttributes
+    | EditorJSX.BlockTuneAttributes
+    | null;
+  isRoot: boolean;
 };
 
 export type Original = VNode | string | number | null;

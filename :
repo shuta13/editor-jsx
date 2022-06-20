@@ -3,10 +3,12 @@ import { createElement, Fragment } from "./create-element";
 import { Props, VNode } from "./types";
 import { isEditorJSVNode } from "./parser";
 
-const pluginMethodPrefixes = {
-  STATIC_GETTER: "static_get_",
-  STATIC_METHOD: "static_",
-} as const;
+type RNode = {
+  parent: HTMLElement | null;
+  children: VNode[] | null;
+  siblings: VNode[] | null;
+  nodes: HTMLElement[];
+};
 
 const isWhiteSpace = (str: string) => str === " ";
 const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
@@ -92,7 +94,8 @@ const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   return vNode;
 };
 
-const createNodes = (vNode: VNode): VNode => {
+const createDomTree = (vNode: VNode, rNode: RNode): RNode | VNode => {
+  console.log(vNode);
   if (vNode.parent) {
     const parentDom = vNode.parent.dom;
     parentDom?.appendChild(vNode.dom);
@@ -100,58 +103,24 @@ const createNodes = (vNode: VNode): VNode => {
   }
   if (vNode.children) {
     for (const child of vNode.children) {
-      createNodes(child);
+      createDomTree(child, rNode);
     }
   }
-
-  return vNode;
-};
-
-const mapPluginProps = (
-  pluginProps: NonNullable<VNode["pluginProps"]>,
-  domTree: HTMLElement
-) => {
-  const { STATIC_GETTER, STATIC_METHOD } = pluginMethodPrefixes;
-  class Plugin {
-    render() {
-      return domTree;
-    }
-  }
-
-  for (const [k, v] of Object.entries(pluginProps)) {
-    if (k.startsWith(STATIC_GETTER)) {
-      const key = k.replace(STATIC_GETTER, "");
-      Plugin[key as keyof typeof Plugin] = v;
-    } else if (k.startsWith(STATIC_METHOD)) {
-      const key = k.replace(STATIC_METHOD, "");
-      Plugin[key as keyof typeof Plugin] = v;
-    } else {
-      // @ts-ignore
-      Plugin.prototype[k] = v;
-    }
-  }
-
-  return Plugin as unknown as ToolConstructable;
+  return rNode;
 };
 
 const normalize = (vNode: VNode) => {
-  // NOTE: create DOM node
-  let domTree: HTMLElement | null = null;
-  const nodes = createNodes(vNode);
-  if (nodes.isRoot && nodes.children?.length === 1) {
-    for (const node of nodes.children) {
-      domTree = node.dom as HTMLElement;
-    }
-  } else {
-    throw new Error();
-  }
-
-  // NOTE: map pluginProps to instance
-  if (vNode.pluginProps && domTree) {
-    return mapPluginProps(vNode.pluginProps, domTree);
-  } else {
-    throw new Error();
-  }
+  const rNode: RNode = {
+    parent: null,
+    children: null,
+    siblings: null,
+    nodes: [],
+  };
+  // TODO: create DOM node
+  console.log(createDomTree(vNode, rNode));
+  // TODO: map pluginProps to instance
+  class Plugin {}
+  return Plugin as unknown as ToolConstructable;
 };
 
 /**
@@ -160,7 +129,7 @@ const normalize = (vNode: VNode) => {
 export const createTool = (
   vNode: VNode,
   parentDom: unknown
-): ToolConstructable => {
+): ToolConstructable | Error => {
   // TODO: create Editor.js plugin class as vnode
   const initialVNode = createElement(Fragment, null, vNode);
 
@@ -169,7 +138,6 @@ export const createTool = (
 
   if (nodes !== null) {
     return normalize(nodes);
-  } else {
-    return class {} as unknown as ToolConstructable;
   }
+  throw new Error();
 };

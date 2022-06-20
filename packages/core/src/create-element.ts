@@ -1,4 +1,4 @@
-import { Key, Ref, VNodeProps, VNode } from "./types";
+import { Key, Ref, VNodeProps, VNode, Props } from "./types";
 
 const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
   const vNode: VNode = {
@@ -16,6 +16,8 @@ const createVNode = ({ type, props, key, ref, original }: VNodeProps) => {
     // @ts-expect-error
     constructor: undefined,
     original, // NOTE: absolutely null? : https://github.com/preactjs/preact/blob/master/src/create-element.js#L40
+    pluginProps: null,
+    isRoot: false,
   };
 
   return vNode;
@@ -26,16 +28,7 @@ export const createElement = (
   config: { [key: string]: any } | null,
   ...children: VNode[] // NOTE: evil...
 ) => {
-  const props: { [key: string]: any } = {};
-
-  // if (typeof type === "function") {
-  //   type(props);
-  // }
-  // console.log("////////");
-  // console.log({ type });
-  // console.log({ props });
-  // console.log({ children });
-  // console.log("////////");
+  const emptyProps: { [key: string]: any } = {};
 
   let key: Key | undefined = undefined;
   let ref: Ref | undefined = undefined;
@@ -46,16 +39,16 @@ export const createElement = (
     if (i === "ref") {
       ref = config[i];
     }
-    props[i] = config[i];
+    emptyProps[i] = config[i];
   }
 
   if (children != null) {
-    props.children = children;
+    emptyProps.children = children;
   }
 
   return createVNode({
     type,
-    props,
+    props: emptyProps as unknown as Props,
     key,
     ref,
     original: null,

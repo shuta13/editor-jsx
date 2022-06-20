@@ -26,11 +26,13 @@ const CustomTool: EditorJSX.Tool = () => {
       static_get_isReadOnlySupported={undefined}
       static_get_toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
     >
-      <button onClick={handleClick} /> {/* inserted block */}
-      <button onClick={handleClick} /> {/* inserted block */}
-      <button onClick={handleClick} /> {/* inserted block */}
-      <button onClick={handleClick} /> {/* inserted block */}
-      <button onClick={handleClick} /> {/* inserted block */}
+      <div>
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+      </div>
     </tool>
   );
 };
@@ -65,6 +67,17 @@ const CustomBlockTune: EditorJSX.BlockTune = () => {
     >
       <div>
         <span>BlockTune</span>
+        <div>
+          <span>nested</span>
+        </div>
+        <span />
+        <div>
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+        </div>
       </div>
     </blockTune>
   );
@@ -74,13 +87,18 @@ const customTool = createTool(<CustomTool />, null);
 const customInlineTool = createTool(<CustomInlineTool />, null);
 const customBlockTune = createTool(<CustomBlockTune />, null);
 
-// new EditorJS({
-//   tools: {
-//     customTool,
-//     CustomInlineTool: { class: customInlineTool },
-//     CustomBlockTune: { class: customBlockTune },
-//   },
-// });
+const e = document.createElement("div");
+e.id = "editorjs";
+document.body.appendChild(e);
+
+new EditorJS({
+  holderId: "editorjs",
+  tools: {
+    customTool,
+    CustomInlineTool: { class: customInlineTool },
+    CustomBlockTune: { class: customBlockTune },
+  },
+});
 
 // ```
 // new Editor({
