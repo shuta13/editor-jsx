@@ -8,12 +8,14 @@
 
 ## Getting started
 
+TODO:
+
 ## Usage
 
 ```tsx
 /* @jsx h */
-import { h, createTool } from "react-editor-jsx";
-import type { EditorJSX } from "react-editor-jsx";
+import { h, createTool } from "editor-jsx";
+import type { EditorJSX } from "editor-jsx";
 import EditorJS from "@editorjs/editorjs";
 
 const CustomTool: EditorJSX.Tool = () => {
@@ -31,15 +33,21 @@ const CustomTool: EditorJSX.Tool = () => {
       destory={undefined}
       onPaste={undefined}
       merge={undefined}
-      _pasteConfig={undefined}
-      _sanitize={undefined}
-      _shortcut={undefined}
-      _conversionConfig={undefined}
-      _enableLineBreaks={undefined}
-      _isReadOnlySupported={undefined}
-      _toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
+      static_get_pasteConfig={undefined}
+      static_get_sanitize={undefined}
+      static_get_shortcut={undefined}
+      static_get_conversionConfig={undefined}
+      static_get_enableLineBreaks={undefined}
+      static_get_isReadOnlySupported={undefined}
+      static_get_toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
     >
-      <button onClick={handleClick} /> {/* inserted block */}
+      <div>
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button onClick={handleClick}>button</button> {/* inserted block */}
+      </div>
     </tool>
   );
 };
@@ -51,10 +59,10 @@ const CustomInlineTool: EditorJSX.InlineTool = () => {
       checkState={() => {}}
       renderActions={undefined}
       clear={undefined}
-      _isInline={true}
-      _shortcut={undefined}
-      _sanitize={undefined}
-      _title={undefined}
+      static_get_isInline={true}
+      get_shortcut={undefined}
+      static_get_sanitize={undefined}
+      static_get_title={undefined}
     >
       <div>
         <span>InlineTool</span>
@@ -68,12 +76,23 @@ const CustomBlockTune: EditorJSX.BlockTune = () => {
     <blockTune
       save={undefined}
       wrap={undefined}
-      _isTune={true}
-      _prepare={undefined}
-      _reset={undefined}
+      static_get_isTune={true}
+      static_prepare={undefined}
+      static_reset={undefined}
     >
       <div>
         <span>BlockTune</span>
+        <div>
+          <span>nested</span>
+        </div>
+        <span />
+        <div>
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+          <button>button</button> {/* inserted block */}
+        </div>
       </div>
     </blockTune>
   );
@@ -83,7 +102,12 @@ const customTool = createTool(<CustomTool />, null);
 const customInlineTool = createTool(<CustomInlineTool />, null);
 const customBlockTune = createTool(<CustomBlockTune />, null);
 
+const e = document.createElement("div");
+e.id = "editorjs";
+document.body.appendChild(e);
+
 new EditorJS({
+  holderId: "editorjs",
   tools: {
     customTool,
     CustomInlineTool: { class: customInlineTool },
@@ -96,8 +120,11 @@ new EditorJS({
 
 - [x] Add skelton
 - [x] Add types for custom JSX elements
+- [ ] Add a parser for JSX and syntax of Editor.js tools
+  - [x] Prototyping(Add a parser)
+  - [ ] Refactoring
 - [ ] Add implements of diff or reconcile
-- [ ] Add functions for transforming vnode to instance of Editor.js
+- [x] Add functions for transforming JSX nodes to plugin class syntax
 
 ## Contributing
 
