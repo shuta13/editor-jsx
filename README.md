@@ -8,6 +8,10 @@
 
 ## Getting started
 
+```shell
+npm i @editorjs/editorjs editor-jsx
+```
+
 TODO:
 
 ## Usage
