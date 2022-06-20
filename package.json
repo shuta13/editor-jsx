@@ -1,12 +1,11 @@
 {
-  "private": false,
-  "name": "editor-jsx",
-  "version": "0.0.2",
+  "private": true,
+  "name": "editor-jsx--root",
   "description": "JSX Dialect for Editor.js",
-  "main": "dist/index.js",
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "start": "npm run start --workspaces --if-present",
+    "prepublishOnly": "npm run build",
     "clean": "npm run clean --workspaces --if-present",
     "watch": "run-p watch:core watch:feature",
     "watch:core": "npm run --workspace=editor-jsx watch",
