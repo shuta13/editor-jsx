@@ -99,21 +99,3 @@ new EditorJS({
     CustomBlockTune: { class: customBlockTune },
   },
 });
-
-// ```
-// new Editor({
-// tools: [
-//  CustomPlugin
-// ]
-//     })
-//
-// class CustomPlugin {
-//   static get toolbar() {}
-//   // ↑props
-//   // ↓宣言的
-//   suround() {}
-//   render() {
-//
-//   }
-// }
-// ```
