@@ -1,6 +1,6 @@
 # editor-jsx
 
-## [INFO] Under construction
+## [INFO] Currently in early development
 
 ## About editor-jsx
 
