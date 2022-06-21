@@ -74,7 +74,8 @@ const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
 
     // attach event handler
     for (const [k, v] of Object.entries(eventHandlers)) {
-      element.setAttribute(k.toLowerCase(), v);
+      // @ts-expect-error
+      element[k.toLowerCase()] = v;
     }
 
     vNode.dom = element;
@@ -118,7 +119,7 @@ const mapPluginProps = (
       const key = k.replace(STATIC_METHOD, "");
       Plugin[key as keyof typeof Plugin] = v;
     } else {
-      // @ts-ignore
+      // @ts-expect-error
       Plugin.prototype[k] = v;
     }
   }
