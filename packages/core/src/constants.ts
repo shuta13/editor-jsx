@@ -2,7 +2,7 @@ import { EditorJSX } from "./types";
 
 export type EditorJSXVNodeType = keyof EditorJSX.EditorJSToolElements;
 
-export const EMPTY_V_NODE: {
+export const emptyVNode: {
   [K in EditorJSXVNodeType]: null;
 } = {
   tool: null,

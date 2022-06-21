@@ -170,7 +170,8 @@ If the `@jsx h` comment is not enabled, you can use editor-jsx by modifying `@ba
 - [x] Add types for custom JSX elements
 - [ ] Add a parser for JSX and syntax of Editor.js tools
   - [x] Prototyping(Add a simple parser)
-  - [ ] Refactoring
+  - [ ] JSX as props
+  - [ ] Access params of constructor as props
 - [ ] Add implements of diff or reconcile
 - [x] Add functions for transforming JSX nodes to plugin class syntax
 

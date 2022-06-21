@@ -59,7 +59,9 @@ export namespace EditorJSX {
   export interface ToolAttributes<C = any> {
     save: (blockContent: C) => void;
     validate?: boolean;
-    renderSettings?: { name: string; icon: JSX.IntrinsicElements }[];
+    // TODO: JSX as props
+    renderSettings?: { name: string; icon: string }[];
+    // renderSettings?: { name: string; icon: JSX.IntrinsicElements }[];
     destory?: () => void;
     onPaste?: (event: PasteEvent) => void;
     merge?: (blockContent: C) => void;
@@ -71,7 +73,8 @@ export namespace EditorJSX {
       patterns: { [key: string]: RegExp };
     };
     static_get_sanitize?: { [key: string]: any };
-    static_get_toolbox?: { title: string; icon: JSX.IntrinsicElements };
+    static_get_toolbox?: { title: string; icon: string };
+    // static_get_toolbox?: { title: string; icon: JSX.IntrinsicElements };
     static_get_shortcut?: string;
     static_get_conversionConfig?: { export: string; import: string };
     static_get_enableLineBreaks?: boolean;

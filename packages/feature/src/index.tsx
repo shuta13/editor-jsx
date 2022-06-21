@@ -24,7 +24,7 @@ const CustomTool: EditorJSX.Tool = () => {
       static_get_conversionConfig={undefined}
       static_get_enableLineBreaks={undefined}
       static_get_isReadOnlySupported={undefined}
-      static_get_toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
+      static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
     >
       <div>
         <button onClick={handleClick}>button</button> {/* inserted block */}
@@ -50,7 +50,7 @@ const CustomInlineTool: EditorJSX.InlineTool = () => {
       static_get_title={undefined}
     >
       <div>
-        <span>InlineTool</span>
+        <span>📝</span>
       </div>
     </inlineTool>
   );

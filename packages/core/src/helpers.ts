@@ -1,4 +1,4 @@
-import { EMPTY_V_NODE, EditorJSXVNodeType } from "./constants";
+import { emptyVNode, EditorJSXVNodeType } from "./constants";
 
 export const isWhiteSpace = (str: string) => str === " ";
 export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
@@ -7,5 +7,15 @@ export const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
 export const isEditorJSVNode = (
   type: EditorJSXVNodeType | string
 ): type is EditorJSXVNodeType => {
-  return hasOwnProperty(EMPTY_V_NODE, type as EditorJSXVNodeType);
+  return hasOwnProperty(emptyVNode, type as EditorJSXVNodeType);
+};
+
+export const isObjectFactory = (o: any) => {
+  const isObject =
+    o != null && typeof o === "object" && typeof o !== "function";
+  const isEmptyObject = isObject && Object.getOwnPropertyNames(o).length > 0;
+  return {
+    isObject,
+    isEmptyObject,
+  };
 };

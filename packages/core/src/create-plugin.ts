@@ -1,8 +1,10 @@
 import type { ToolConstructable } from "@editorjs/editorjs";
+import type { UnionToIntersection } from "type-fest";
 import { createElement, Fragment } from "./create-element";
 import { Props, VNode } from "./types";
 import { pluginMethodPrefixes } from "./constants";
 import { hasOwnProperty, isWhiteSpace, isEditorJSVNode } from "./helpers";
+import { isObjectFactory } from "./helpers";
 
 const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   if (hasOwnProperty(vNode, "parent") && parent) {
@@ -131,15 +133,48 @@ const createDomTree = (vNode: VNode) => {
   // NOTE: create DOM node
   let domTree: HTMLElement | null = null;
   const nodes = createNodes(vNode);
-  if (nodes.isRoot && nodes.children?.length === 1) {
+  if (
+    isEditorJSVNode(nodes.type as string) &&
+    nodes.isRoot &&
+    nodes.children?.length === 1
+  ) {
     for (const node of nodes.children) {
       domTree = node.dom as HTMLElement;
     }
     return domTree;
-  } else {
+  }
+  // else if (nodes.isRoot && nodes.children?.length === 1) {
+  //   console.log("nodes", nodes.dom);
+  //   return nodes.dom as HTMLElement;
+  // }
+  else {
     throw new Error();
   }
 };
+
+// const transformPluginProps = (
+//   pluginProps: NonNullable<VNode["pluginProps"]>
+// ): NonNullable<VNode["pluginProps"]> => {
+//   for (const [k, v] of Object.entries(pluginProps)) {
+//     // NOTE: Check poperty object
+//     const { isObject, isEmptyObject } = isObjectFactory(v);
+//     if (isObject && isEmptyObject) {
+//       if (hasOwnProperty(v, "type")) {
+//         const nodes = traverseNodes(v);
+//         if (nodes !== null) {
+//           // NOTE: This nodes doesn't have Editor.js native JSX Element, so add `isRoot: true` manually
+//           nodes.isRoot = true;
+//           const domTree = createDomTree(nodes);
+//           // @ts-expect-error
+//           pluginProps[k] = domTree;
+//         }
+//       } else {
+//         return transformPluginProps(v);
+//       }
+//     }
+//   }
+//   return pluginProps;
+// };
 
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
@@ -152,6 +187,9 @@ export const createTool = (vNode: VNode): ToolConstructable => {
   const nodes = traverseNodes(initialVNode);
 
   if (nodes?.pluginProps != null) {
+    // TODO: JSX as props
+    // transformPluginProps(nodes?.pluginProps);
+
     const domTree = createDomTree(nodes);
     if (domTree !== null) {
       return mapPluginProps(nodes.pluginProps, domTree);
