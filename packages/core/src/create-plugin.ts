@@ -1,16 +1,8 @@
-import { ToolConstructable } from "@editorjs/editorjs";
+import type { ToolConstructable } from "@editorjs/editorjs";
 import { createElement, Fragment } from "./create-element";
 import { Props, VNode } from "./types";
-import { isEditorJSVNode } from "./parser";
-
-const pluginMethodPrefixes = {
-  STATIC_GETTER: "static_get_",
-  STATIC_METHOD: "static_",
-} as const;
-
-const isWhiteSpace = (str: string) => str === " ";
-const hasOwnProperty = <T = {}>(thisArg: T, key: keyof T) =>
-  Object.prototype.hasOwnProperty.call(thisArg, key);
+import { pluginMethodPrefixes } from "./constants";
+import { hasOwnProperty, isWhiteSpace, isEditorJSVNode } from "./helpers";
 
 const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   if (hasOwnProperty(vNode, "parent") && parent) {
@@ -157,10 +149,7 @@ const normalize = (vNode: VNode) => {
 /**
  * @description Remove `replaceNode` from params because of using this directory as API
  */
-export const createTool = (
-  vNode: VNode,
-  parentDom: unknown
-): ToolConstructable => {
+export const createTool = (vNode: VNode): ToolConstructable => {
   // TODO: create Editor.js plugin class as vnode
   const initialVNode = createElement(Fragment, null, vNode);
 

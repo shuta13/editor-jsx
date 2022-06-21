@@ -83,9 +83,9 @@ const CustomBlockTune: EditorJSX.BlockTune = () => {
   );
 };
 
-const customTool = createTool(<CustomTool />, null);
-const customInlineTool = createTool(<CustomInlineTool />, null);
-const customBlockTune = createTool(<CustomBlockTune />, null);
+const customTool = createTool(<CustomTool />);
+const customInlineTool = createTool(<CustomInlineTool />);
+const customBlockTune = createTool(<CustomBlockTune />);
 
 const e = document.createElement("div");
 e.id = "editorjs";

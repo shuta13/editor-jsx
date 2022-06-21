@@ -6,6 +6,7 @@
     "build": "npm run build --workspaces --if-present",
     "start": "npm run start --workspaces --if-present",
     "prepublishOnly": "npm run build",
+    "release": "npm publish --workspaces",
     "clean": "npm run clean --workspaces --if-present",
     "watch": "run-p watch:core watch:feature",
     "watch:core": "npm run --workspace=editor-jsx watch",

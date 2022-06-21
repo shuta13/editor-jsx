@@ -9,3 +9,8 @@ export const EMPTY_V_NODE: {
   inlineTool: null,
   blockTune: null,
 } as const;
+
+export const pluginMethodPrefixes = {
+  STATIC_GETTER: "static_get_",
+  STATIC_METHOD: "static_",
+} as const;

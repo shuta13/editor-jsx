@@ -1,4 +1,4 @@
-import { PasteEvent, ToolConstructable } from "@editorjs/editorjs";
+import { PasteEvent } from "@editorjs/editorjs";
 
 export type ComponentClass<P = {}, _S = {}> = {
   new (props: P, context?: unknown): unknown;
