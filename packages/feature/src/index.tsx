@@ -92,7 +92,7 @@ e.id = "editorjs";
 document.body.appendChild(e);
 
 new EditorJS({
-  holderId: "editorjs",
+  holder: "editorjs",
   tools: {
     customTool,
     CustomInlineTool: { class: customInlineTool },

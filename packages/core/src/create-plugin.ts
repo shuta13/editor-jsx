@@ -4,7 +4,7 @@ import { Props, VNode } from "./types";
 import { pluginMethodPrefixes } from "./constants";
 import { hasOwnProperty, isWhiteSpace, isEditorJSVNode } from "./helpers";
 
-const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
+const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   if (hasOwnProperty(vNode, "parent") && parent) {
     vNode.parent = parent;
   }
@@ -12,10 +12,10 @@ const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
     const childlen = vNode.type(vNode.props);
     if (Array.isArray(childlen)) {
       for (const v of childlen) {
-        return walkNodes(v, vNode);
+        return traverseNodes(v, vNode);
       }
     } else if (childlen != null) {
-      return walkNodes(childlen, vNode);
+      return traverseNodes(childlen, vNode);
     } else {
       return null;
     }
@@ -23,7 +23,7 @@ const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
     const { children, ...pluginProps } = vNode.props;
 
     for (const child of children) {
-      walkNodes(child, vNode);
+      traverseNodes(child, vNode);
     }
 
     vNode.isRoot = true;
@@ -68,7 +68,7 @@ const walkNodes = (vNode: VNode, parent?: VNode): VNode | null => {
         vNode.children = children.filter((child: VNode) =>
           hasOwnProperty(child, "type")
         );
-        walkNodes(child, vNode);
+        traverseNodes(child, vNode);
       }
     }
 
@@ -127,7 +127,7 @@ const mapPluginProps = (
   return Plugin as unknown as ToolConstructable;
 };
 
-const normalize = (vNode: VNode) => {
+const createDomTree = (vNode: VNode) => {
   // NOTE: create DOM node
   let domTree: HTMLElement | null = null;
   const nodes = createNodes(vNode);
@@ -135,13 +135,7 @@ const normalize = (vNode: VNode) => {
     for (const node of nodes.children) {
       domTree = node.dom as HTMLElement;
     }
-  } else {
-    throw new Error();
-  }
-
-  // NOTE: map pluginProps to instance
-  if (vNode.pluginProps && domTree) {
-    return mapPluginProps(vNode.pluginProps, domTree);
+    return domTree;
   } else {
     throw new Error();
   }
@@ -155,10 +149,15 @@ export const createTool = (vNode: VNode): ToolConstructable => {
   const initialVNode = createElement(Fragment, null, vNode);
 
   // TODO: diff & commit
-  const nodes = walkNodes(initialVNode);
+  const nodes = traverseNodes(initialVNode);
 
-  if (nodes !== null) {
-    return normalize(nodes);
+  if (nodes?.pluginProps != null) {
+    const domTree = createDomTree(nodes);
+    if (domTree !== null) {
+      return mapPluginProps(nodes.pluginProps, domTree);
+    } else {
+      return class {} as unknown as ToolConstructable;
+    }
   } else {
     return class {} as unknown as ToolConstructable;
   }
