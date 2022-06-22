@@ -120,7 +120,7 @@ const mapPluginProps = (
   const { STATIC_GETTER, STATIC_METHOD } = pluginMethodPrefixes;
   class Plugin {
     render() {
-      return domTree;
+      return domTree; // TODO: fix bugs
     }
   }
 
@@ -201,6 +201,7 @@ export const createTool = (vNode: VNode): ToolConstructable => {
     // transformPluginProps(nodes?.pluginProps);
 
     const domTree = createDomTree(nodes);
+    console.log(domTree);
     if (domTree !== null) {
       return mapPluginProps(nodes.pluginProps, domTree);
     } else {
