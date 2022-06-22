@@ -1,10 +1,10 @@
 import type { ToolConstructable } from "@editorjs/editorjs";
-import type { UnionToIntersection } from "type-fest";
 import { createElement, Fragment } from "./create-element";
 import { Props, VNode } from "./types";
 import { pluginMethodPrefixes } from "./constants";
 import { hasOwnProperty, isWhiteSpace, isEditorJSVNode } from "./helpers";
-import { isObjectFactory } from "./helpers";
+// import type { UnionToIntersection } from "type-fest";
+// import { isObjectFactory } from "./helpers";
 
 const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   if (hasOwnProperty(vNode, "parent") && parent) {
@@ -152,13 +152,14 @@ const createDomTree = (vNode: VNode) => {
   }
 };
 
+// TODO: JSX as props
 // const transformPluginProps = (
 //   pluginProps: NonNullable<VNode["pluginProps"]>
 // ): NonNullable<VNode["pluginProps"]> => {
 //   for (const [k, v] of Object.entries(pluginProps)) {
 //     // NOTE: Check poperty object
 //     const { isObject, isEmptyObject } = isObjectFactory(v);
-//     if (isObject && isEmptyObject) {
+//     if (isObject && !isEmptyObject) {
 //       if (hasOwnProperty(v, "type")) {
 //         const nodes = traverseNodes(v);
 //         if (nodes !== null) {
@@ -180,14 +181,12 @@ const createDomTree = (vNode: VNode) => {
  * @description Remove `replaceNode` from params because of using this directory as API
  */
 export const createTool = (vNode: VNode): ToolConstructable => {
-  // TODO: create Editor.js plugin class as vnode
   const initialVNode = createElement(Fragment, null, vNode);
 
-  // TODO: diff & commit
   const nodes = traverseNodes(initialVNode);
+  // TODO: diff & commit
 
   if (nodes?.pluginProps != null) {
-    // TODO: JSX as props
     // transformPluginProps(nodes?.pluginProps);
 
     const domTree = createDomTree(nodes);

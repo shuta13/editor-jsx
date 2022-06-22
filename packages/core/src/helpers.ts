@@ -13,7 +13,7 @@ export const isEditorJSVNode = (
 export const isObjectFactory = (o: any) => {
   const isObject =
     o != null && typeof o === "object" && typeof o !== "function";
-  const isEmptyObject = isObject && Object.getOwnPropertyNames(o).length > 0;
+  const isEmptyObject = isObject && Object.getOwnPropertyNames(o).length === 0;
   return {
     isObject,
     isEmptyObject,
