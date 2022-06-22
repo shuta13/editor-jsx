@@ -10,12 +10,27 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        loader: "esbuild-loader",
+        options: {
+          loader: "tsx",
+          target: "es2016",
+          tsconfigRaw: require("./tsconfig.json"),
+        },
         exclude: /nodu_module/,
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "esbuild-loader",
+            options: {
+              loader: "css",
+              minify: true,
+            },
+          },
+        ],
       },
     ],
   },
