@@ -2,7 +2,12 @@ import type { ToolConstructable } from "@editorjs/editorjs";
 import { createElement, Fragment } from "./create-element";
 import { Props, VNode } from "./types";
 import { pluginMethodPrefixes } from "./constants";
-import { hasOwnProperty, isWhiteSpace, isEditorJSVNode } from "./helpers";
+import {
+  hasOwnProperty,
+  isWhiteSpace,
+  isEditorJSVNode,
+  parseObjectToCssText,
+} from "./helpers";
 // import type { UnionToIntersection } from "type-fest";
 // import { isObjectFactory } from "./helpers";
 
@@ -39,7 +44,7 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
   } else if (typeof vNode.type === "string") {
     // for HTMLElement
     const element = document.createElement(vNode.type);
-    const { children, ...eventHandlers } = vNode.props;
+    const { children, ...otherProps } = vNode.props;
 
     // check children type
     for (const child of children) {
@@ -75,9 +80,15 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
     }
 
     // attach event handler
-    for (const [k, v] of Object.entries(eventHandlers)) {
-      // @ts-expect-error
-      element[k.toLowerCase()] = v;
+    for (const [k, v] of Object.entries(otherProps)) {
+      if (k === "className") {
+        element.className = v;
+      } else if (k === "style") {
+        element.style.cssText = parseObjectToCssText(v);
+      } else {
+        // @ts-expect-error
+        element[k.toLowerCase()] = v;
+      }
     }
 
     vNode.dom = element;

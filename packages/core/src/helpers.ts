@@ -19,3 +19,11 @@ export const isObjectFactory = (o: any) => {
     isEmptyObject,
   };
 };
+
+export const parseObjectToCssText = (o: { [key: string]: any }) => {
+  let cssText = "";
+  for (const [k, v] of Object.entries(o)) {
+    cssText += `${k}: ${v};`;
+  }
+  return cssText;
+};

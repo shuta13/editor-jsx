@@ -28,11 +28,12 @@ const CustomTool: EditorJSX.Tool = () => {
       static_get_toolbox={{ title: "CustomTool", icon: "<span>🔮</span>" }}
     >
       <div>
-        <button onClick={handleClick}>button</button> {/* inserted block */}
-        <button onClick={handleClick}>button</button> {/* inserted block */}
-        <button onClick={handleClick}>button</button> {/* inserted block */}
-        <button onClick={handleClick}>button</button> {/* inserted block */}
-        <button onClick={handleClick}>button</button> {/* inserted block */}
+        <button
+          style={{ border: "none", cursor: "pointer" }}
+          onClick={handleClick}
+        >
+          button
+        </button>
       </div>
     </tool>
   );
