@@ -157,9 +157,9 @@ If the `@jsx h` comment is not enabled, you can use editor-jsx by modifying `@ba
 - [x] Add types for custom JSX elements
 - [ ] Add a parser for JSX and syntax of Editor.js tools
   - [x] Prototyping(Add a simple parser)
-  - [ ] [JSX as props](https://github.com/shuta13/editor-jsx/blob/2152be5020b83c75ac8c0d456a07b2ca5fc260fc/packages/core/src/types.ts#L64)
+  - [x] [Styles API support](https://editorjs.io/styles)
   - [ ] [Access params of constructor as props](https://editorjs.io/tools-api#class-constructor)
-  - [ ] [Styles API support](https://editorjs.io/styles)
+  - [ ] [JSX as props](https://github.com/shuta13/editor-jsx/blob/2152be5020b83c75ac8c0d456a07b2ca5fc260fc/packages/core/src/types.ts#L64)
 - [ ] Add unit & integration testing
 - [ ] Add implements of diff or reconcile
 - [x] Add functions for transforming JSX nodes to plugin class syntax

@@ -52,7 +52,7 @@ const CustomInlineTool: EditorJSX.InlineTool = () => {
       static_get_title={undefined}
     >
       <div className="inline-tool-container">
-        <span>📝</span>
+        <span className="ce-inline-tool">📝</span>
       </div>
     </inlineTool>
   );
