@@ -1,4 +1,5 @@
 /* @jsx h */
+import "./main.css";
 import { h, createTool } from "editor-jsx";
 import type { EditorJSX } from "editor-jsx";
 import EditorJS from "@editorjs/editorjs";
@@ -49,7 +50,7 @@ const CustomInlineTool: EditorJSX.InlineTool = () => {
       static_get_sanitize={undefined}
       static_get_title={undefined}
     >
-      <div>
+      <div className="inline-tool-container">
         <span>📝</span>
       </div>
     </inlineTool>
