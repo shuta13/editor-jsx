@@ -1,15 +1,13 @@
-# editor-jsx
-
 <div align="center">
+  <h1>
+    ⚔️  editor-jsx - JSX Dialect for Editor.js ⚔️
+  </h1>
   <h3>
     🚜 CURRENTLY IN EARLY DEVELOPMENT 🚜
   </h3>
   <p>
     Breaking changes often may occur
   </p>
-  <h1>
-    ⚔️  editor-jsx - JSX Dialect for Editor.js ⚔️
-  </h1>
   <p>
     <a href="https://codesandbox.io/s/focused-merkle-ky84t5?file=/src/index.tsx">Live Demo</a>
     <span>・</span>
