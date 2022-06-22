@@ -65,14 +65,7 @@ const CustomTool: EditorJSX.Tool = () => {
       static_get_toolbox={{ title: "CustomTool", icon: <span>🔮</span> }}
     >
       <div>
-        <button onClick={handleClick}>button</button>{" "}
-        {/* something to comment */}
-        <button onClick={handleClick}>button</button> {/* something to comment */}
-        <button onClick={handleClick}>button</button>{" "}
-        {/* something to comment */}
-        <button onClick={handleClick}>button</button> {/* something to comment */}
-        <button onClick={handleClick}>button</button>{" "}
-        {/* something to comment */}
+        <button onClick={handleClick}>button</button>
       </div>
     </tool>
   );
@@ -113,10 +106,6 @@ const CustomBlockTune: EditorJSX.BlockTune = () => {
         </div>
         <span />
         <div>
-          <button>button</button>
-          <button>button</button>
-          <button>button</button>
-          <button>button</button>
           <button>button</button>
         </div>
       </div>
