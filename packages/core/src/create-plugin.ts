@@ -85,6 +85,8 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
         element.className = v;
       } else if (k === "style") {
         element.style.cssText = parseObjectToCssText(v);
+      } else if (k === "onClick") {
+        element.addEventListener("click", v);
       } else {
         // @ts-expect-error
         element[k.toLowerCase()] = v;
@@ -100,12 +102,12 @@ const traverseNodes = (vNode: VNode, parent?: VNode): VNode | null => {
 
 const createNodes = (vNode: VNode): VNode => {
   if (vNode.parent) {
-    const parentDom = vNode.parent.dom;
-    parentDom?.appendChild(vNode.dom);
-    vNode.parent.dom = parentDom;
+    vNode.parent.dom?.appendChild(vNode.dom);
   }
+
   if (vNode.children) {
     for (const child of vNode.children) {
+      vNode.dom?.appendChild(child.dom);
       createNodes(child);
     }
   }
@@ -115,14 +117,9 @@ const createNodes = (vNode: VNode): VNode => {
 
 const mapPluginProps = (
   pluginProps: NonNullable<VNode["pluginProps"]>,
-  domTree: HTMLElement
+  Plugin: ToolConstructable
 ) => {
   const { STATIC_GETTER, STATIC_METHOD } = pluginMethodPrefixes;
-  class Plugin {
-    render() {
-      return domTree;
-    }
-  }
 
   for (const [k, v] of Object.entries(pluginProps)) {
     if (k.startsWith(STATIC_GETTER)) {
@@ -132,25 +129,23 @@ const mapPluginProps = (
       const key = k.replace(STATIC_METHOD, "");
       Plugin[key as keyof typeof Plugin] = v;
     } else {
-      // @ts-expect-error
       Plugin.prototype[k] = v;
     }
   }
 
-  return Plugin as unknown as ToolConstructable;
+  return Plugin;
 };
 
 const createDomTree = (vNode: VNode) => {
   // NOTE: create DOM node
   let domTree: HTMLElement | null = null;
-  const nodes = createNodes(vNode);
   if (
-    isEditorJSVNode(nodes.type as string) &&
-    nodes.isRoot &&
-    nodes.children?.length === 1
+    isEditorJSVNode(vNode.type as string) &&
+    vNode.isRoot &&
+    vNode.children?.length === 1
   ) {
-    for (const node of nodes.children) {
-      domTree = node.dom as HTMLElement;
+    for (const child of vNode.children) {
+      domTree = createNodes(child).dom as HTMLElement;
     }
     return domTree;
   }
@@ -163,7 +158,6 @@ const createDomTree = (vNode: VNode) => {
   }
 };
 
-// TODO: JSX as props
 // const transformPluginProps = (
 //   pluginProps: NonNullable<VNode["pluginProps"]>
 // ): NonNullable<VNode["pluginProps"]> => {
@@ -194,19 +188,33 @@ const createDomTree = (vNode: VNode) => {
 export const createTool = (vNode: VNode): ToolConstructable => {
   const initialVNode = createElement(Fragment, null, vNode);
 
-  const nodes = traverseNodes(initialVNode);
+  const initialNodes = traverseNodes(initialVNode);
+
   // TODO: diff & commit
 
-  if (nodes?.pluginProps != null) {
+  class Plugin {}
+
+  if (initialNodes?.pluginProps != null) {
+    // TODO: JSX as props
     // transformPluginProps(nodes?.pluginProps);
 
-    const domTree = createDomTree(nodes);
-    if (domTree !== null) {
-      return mapPluginProps(nodes.pluginProps, domTree);
-    } else {
-      return class {} as unknown as ToolConstructable;
-    }
-  } else {
-    return class {} as unknown as ToolConstructable;
+    // @ts-expect-error
+    Plugin.prototype.render = function () {
+      // NOTE: need to recreate DOM in this render function: https://editorjs.io/tools-api#render
+      // TODO: replace that with more good ways...
+      const newNodes = traverseNodes(initialVNode);
+      if (newNodes) {
+        const domTree = createDomTree(newNodes);
+        if (domTree) {
+          return domTree;
+        }
+      }
+    };
+    return mapPluginProps(
+      initialNodes.pluginProps,
+      Plugin as unknown as ToolConstructable
+    );
   }
+
+  return Plugin as unknown as ToolConstructable;
 };

@@ -25,6 +25,10 @@
     "@editorjs/editorjs": ">=2.24.3"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "type-fest": "^2.13.1"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
   }
 }
