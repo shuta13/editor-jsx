@@ -1,3 +1,5 @@
+# 🚨 editor-jsx has moved to [@bento-editor/plugin-declarative](https://github.com/cam-inc/bento/tree/main/workspaces/plugin-declarative) 🚨
+
 <div align="center">
   <h1>
     ⚔️  editor-jsx - JSX Dialect for Editor.js ⚔️
